@@ -15,3 +15,6 @@ Our passphrases are also compatible with Brainwallet.org and Electrum Wallets, s
 Open Source, Open Standards
 
 Source code is available on Github. Commits and changes are open for peer review and this site is deployed directly from the repository. We encourage this project to be expanded or forked into new projects by the Bitcoin developer community. This entire site can be downloaded from github and run locally. All functionality executes only inside your computer, nothing is transferred to or executed on our servers.
+
+LICENSE: COMMON DEVELOPMENT AND DISTRIBUTION LICENSE Version 1.0 (CDDL-1.0)
+https://github.com/cryowallet/Raw_E/blob/master/LICENSE.txt
