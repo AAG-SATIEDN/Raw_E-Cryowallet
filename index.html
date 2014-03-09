@@ -1,0 +1,554 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CryoWallet.com - Really cool cold storage</title>
+
+    <meta name="description" content="100% secure Bitcoin wallet supporting cold storage. It's a wallet Jim, but not as you know it.">
+    <meta name="Keywords" content="bitcoin, wallet, cold storage, cold, storage, offline, btc, secure, bank, vault, crypto, cryowallet"/>
+    <meta content="CryoWallet" name="author">
+    
+    
+    <!-- Style sheets -->
+    <link href="css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/default.css" rel="stylesheet">
+    <link href="css/packaged-app.css" rel="stylesheet">
+    
+    
+    <!-- The following libraries are required for bitcon addresses and signing. -->
+    <script src="extjs/bitcoin/crypto.js"></script> 
+    <script src="extjs/bitcoin/sha256.js"></script> 
+    <script src="extjs/bitcoin/ripemd160.js"></script> 
+    <script src="extjs/bitcoin/jsbn.js"></script> 
+    <script src="extjs/bitcoin/jsbn2.js"></script> 
+    <script src="extjs/bitcoin/bitcoin.js"></script> 
+    <script src="extjs/bitcoin/util.js"></script> 
+    <script src="extjs/bitcoin/ec.js"></script> 
+    <script src="extjs/bitcoin/sec.js"></script> 
+    <script src="extjs/bitcoin/prng4.js"></script> 
+    <script src="extjs/bitcoin/rng.js"></script> 
+    <script src="extjs/bitcoin/ecdsa.js"></script> 
+    <script src="extjs/bitcoin/eckey.js"></script> 
+    <script src="extjs/bitcoin/base58.js"></script> 
+    <script src="extjs/bitcoin/address.js"></script> 
+    <script src="extjs/bitcoin/opcode.js"></script> 
+    <script src="extjs/bitcoin/script.js"></script> 
+    <script src="extjs/bitcoin/transaction.js"></script> 
+    
+    <!-- JQuery and bootstrap. -->
+    <script src="extjs/jquery-1.9.1.js"></script> 
+    <script src="extjs/bootstrap-collapse.js"></script> 
+    <script src="extjs/bootstrap-transition.js"></script> 
+    <script src="extjs/bootstrap-modal.js"></script> 
+    <script src="extjs/bootstrap-tooltip.js"></script> 
+    <script src="extjs/bootstrap-popover.js"></script> 
+   
+    
+    <!-- Other external libraries. -->
+    <script src="extjs/qrcode.js"></script> 
+    <script src="extjs/mnemonic.js"></script> 
+    <script src="extjs/electrum.js"></script> 
+    
+    <!-- JavaScript created specifically for CryoWallet. -->
+    <script src="js/tx.js"></script> 
+    <script src="js/blockchain.js"></script> 
+    <script src="js/wallet.js"></script> 
+   
+
+    <!--Start of Zopim Live Chat Script-->
+<script type="text/javascript">
+window.$zopim||(function(d,s){var z=$zopim=function(c){z._.push(c)},$=z.s=
+d.createElement(s),e=d.getElementsByTagName(s)[0];z.set=function(o){z.set.
+_.push(o)};z._=[];z.set._=[];$.async=!0;$.setAttribute('charset','utf-8');
+$.src='//v2.zopim.com/?1vpM4mGzfihYoGgRtG83u1f4eNCYK8tW';z.t=+new Date;$.
+type='text/javascript';e.parentNode.insertBefore($,e)})(document,'script');
+</script>
+<!--End of Zopim Live Chat Script-->
+  
+     <link href="favicon.png" rel="icon" type="image/png">
+     
+     <script language="JavaScript" type="text/JavaScript">
+
+function MM_swapImgRestore() { //v3.0
+  var i,x,a=document.MM_sr; for(i=0;a&&i<a.length&&(x=a[i])&&x.oSrc;i++) x.src=x.oSrc;
+}
+
+function MM_preloadImages() { //v3.0
+  var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
+    var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
+    if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
+}
+
+function MM_findObj(n, d) { //v4.01
+  var p,i,x;  if(!d) d=document; if((p=n.indexOf("?"))>0&&parent.frames.length) {
+    d=parent.frames[n.substring(p+1)].document; n=n.substring(0,p);}
+  if(!(x=d[n])&&d.all) x=d.all[n]; for (i=0;!x&&i<d.forms.length;i++) x=d.forms[i][n];
+  for(i=0;!x&&d.layers&&i<d.layers.length;i++) x=MM_findObj(n,d.layers[i].document);
+  if(!x && d.getElementById) x=d.getElementById(n); return x;
+}
+
+function MM_swapImage() { //v3.0
+  var i,j=0,x,a=MM_swapImage.arguments; document.MM_sr=new Array; for(i=0;i<(a.length-2);i+=3)
+   if ((x=MM_findObj(a[i]))!=null){document.MM_sr[j++]=x; if(!x.oSrc) x.oSrc=x.src; x.src=a[i+2];}
+}
+
+</script>
+     
+    
+     
+     
+  </head>
+ <body topmargin=0 marginwidth=0 marginheight=0 onLoad="MM_preloadImage ('win.png','mac.png','lin.png','tor.png','app.png','git.png')">
+
+    <div class="navbar navbar-fixed-top">
+    <div id="headerstreak">
+   <table width="100%"  border="0" style="border-collapse: collapse;">
+  <tr>
+    <td height="10" bgcolor="#4d535f">&nbsp;</td>
+    <td height="10" bgcolor="#0088cc">&nbsp;</td>
+    <td height="10" bgcolor="#ee663e">&nbsp;</td>
+    <td height="10" bgcolor="#f3c146">&nbsp;</td>
+    <td height="10" bgcolor="#4d535f">&nbsp;</td>
+  </tr>
+</table>
+</div>
+      <div class="navbar-inner">
+        <div class="container">
+
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse"> 
+          <span class="icon-bar"></span> <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+          </a> 
+          <a class="brand" href="/"><img src="logosmall.png"></a> 
+          
+       
+          <div class="nav-collapse">
+         <!--   <ul class="nav">
+              <li class="active">
+                <a id="home" href="#">Home</a>
+              </li>
+              <li>
+                <a id="blog" href="">About CryoWallet</a>
+              </li>
+               <li>
+                <a id="blog" href="">Frequent Questions</a>
+              </li>
+               <li>
+                <a id="blog" href="">Contact Us</a>
+              </li>
+        
+            </ul>
+            -->
+            
+            <ul class="nav pull-right">
+            <li>
+            <div id="privacyoptions width="135">
+     <table width="250" border="0">
+      <tr>
+      <td align="center"><a href="/Downloads/Win/CryoWalletSetup.zip" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('windows','','win.png',1)"><img src="win-bw.png" title="Download CryoWallet for Windows" name="windows" width="35" height="52" border="0"></a></td>
+       <td align="center"><a href="/Downloads/Mac/CryoWallet.zip" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('mac','','mac.png',1)"><img src="mac-bw.png" title="Download CryoWallet for Mac" name="mac" width="35" height="52" border="0"></a></td>
+         <td align="center"><a href="/Downloads/Lin/CryoWallet.zip" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('linux','','lin.png',1)"><img src="lin-bw.png" title="Download CryoWallet for Linux" name="linux" width="35" height="52" border="0"></a></td>
+        <td align="center"><a href="http://phytjpthj3q7xbxb.onion" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('tor','','tor.png',1)" target="_blank"><img src="tor-bw.png" title="Access CryoWallet via TOR" name="tor" width="35" height="52" border="0"></a></td>
+        <td align="center"><a href="https://chrome.google.com/webstore/detail/cryowalletcom/fdjcpegfgobhcjeodebempmpeaicekig" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('app','','app.png',1)" target="_blank"><img src="app-bw.png" title="Access CryoWallet via Chrome App" name="app" width="35" height="52" border="0"></a></td>
+        <td align="center"><a href="https://github.com/cryowallet/CryoWallet-Master" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('ext','','git.png',1)" target="_blank"><img src="git-bw.png" title="Access CryoWallet Source Files on Github" name="ext" width="35" height="52" border="0"></a></td>
+      </tr>
+</table
+    </div>
+            </li>
+              <li id="logout-menu">
+               <div id="privacyoptions2 style="padding-left: 40px">
+           <table border="0">
+           <tr><td>
+			  <a id="logout" href="#" title="Logout of Session"><img src="logout.png" width="35" height="52" border="0"></a>
+			  </td>
+			  </tr>
+			  </table>
+			  </div>
+          
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Home Page -->
+   
+      <div id="logon">
+        <div id="header">
+          <h1>Hey there. I'm an ephemeral, yet persistent bitcoin wallet...</h1>
+          <div class="well" id="form-well">
+            <form>
+              <input id="password" placeholder="Enter your CryoWallet 12 word passphrase." value="" class="input-medium" type="password" />
+              <input id="open-sesame" disabled data-toggle="collapse" data-target="#create-keys" class="btn disabled" value="Unlock Wallet" />
+              <input id="generate-password" class="btn btn-success" data-toggle="collapse" data-target="#create-wallet" value="Create a Wallet" />
+            </form>
+            <div id="create-keys" class="collapse">
+              <div class="progress">
+                <div class="bar" id="seed-progress" style="width: 0%;"></div>
+              </div>
+            </div>
+            <div id="create-wallet" class="collapse">
+            
+<table width="93%"  border="0">
+  <tr>
+    <td><img src="thumbup.png"></td>
+    <td> <h4 align="right">All done! You created a wallet. Doesn't get any simpler eh?</h4></td>
+  </tr>
+</table>
+            
+         
+              <p>We don't require any identifying information from you, not even an email address. We've generated your passphrase. It's all you need to access your new bitcoin wallet.
+              </p>
+              
+               <p align="center">Here's your 12-word passphrase. Whatever you do, DO NOT LOSE IT!</p>
+              
+              <p>
+                <input id="generated" value="" class="input-medium" type="text" />
+                <button class="btn" id="regenerate-password" data-toggle="tooltip" title="Click to generate another random passphrase." type="button"><i class="icon-repeat"></i></button>
+              </p>
+              <div></div>
+              <p align="center"><h4> <p align="center">IMPORTANT REMINDER:</p></h4></p>
+              <p align="center"><span class="label label-important">** COPY THIS NOW! IF YOU LOSE YOUR PASSPHRASE YOUR WALLET IS UNRECOVERABLE. FOREVER. **</span></p>
+              <div>.</div>
+              
+            </div>
+          </div>
+          <h2>I can't be compromised, stolen or seized. I exist ONLY locally & ONLY while you're logged in.</h2>
+        </div>
+        
+        <div class="container">
+         
+         
+          <h3 class="sales-title"></h3>
+          <h4 class="sales-subtitle"></h4>
+          <div class="row">
+            <div class="span4">
+              <h4><i class="icon-ok-sign"></i> A wallet Jim, not as you know it</h4>
+              <p>CryoWallet is a <a href="http://bitcoinmagazine.com/8396/deterministic-wallets-advantages-flaw/" target="_blank">deterministic wallet</a>. 
+              Your passphrase is turned into a number which is turned into Bitcoin Addresses. With us your passphrase literally IS your wallet access and backup. Unlike old-style Bitcoin wallets, if you write down the seed to your CryoWallet, and your hard drive gets corrupted, you can recreate your wallet using the same passphrase and all of the addresses, keys and balance will come back again exactly as before.</p> 
+            </div>
+            <div class="span4">
+              <h4><i class="icon-ok-sign"></i> I'm zero footprint cold storage</h4>
+              <p>
+                We don't store your Bitcoins or your private-keys on our servers, they exist only in memory, and 
+                no trace is left on your device once you logout of a session. This way neither ourselves or any hackers can get at your bitcoins via our servers. Traditional <a href="https://en.bitcoin.it/wiki/Cold_storage" target="_blank">'cold storage'</a> means storing coins offline. If you <a href="http://www.nbcnews.com/news/world/it-worker-throws-out-hard-drive-loses-7-5-million-v21654552" target="_blank">lose that device</a> your stash goes too. Now you can safely store bitcoins without fear of <a href="http://www.theguardian.com/technology/2014/feb/25/bitcoin-exchange-mtgox-offline-amid-rumours-of-theft" target="_blank">unscrupulous exchanges</a>. I'm non-device specific cold storage. 
+              </p>
+            </div>
+            <div class="span4">
+              <h4><i class="icon-ok-sign"></i> I'm open source, open standards</h4>
+              <p>  
+              Source code is <a href="https://github.com/cryowallet/CryoWallet-Master" target="_blank">available on Github</a>. Commits and changes are open for peer review and this site is deployed directly from the repository. We encourage this project to be expanded or forked into new projects by the Bitcoin developer community. This entire site can be downloaded from github and run locally. All functionality executes only inside your computer, nothing is transferred to or executed on our servers.
+              </p>
+            </div>
+          </div>
+          <hr />
+          <h3 class="sales-title">We've also got versions for Windows, Mac, Linux, a Chrome App & TOR service!</h3>
+           <hr />
+          <h4 class="sales-subtitle"></h4>
+          <div class="row">
+            <div class="span4">
+              <h4><i class="icon-ok-sign"></i> Choices are great, aren't they?</h4>
+              <p>We know not everyone is the same. So we're creating as many ways to access your CryoWallet as we can. You're not confined to this site. We've created desktop versions. We've also created a Chrome App and TOR Service too. Every single option, including this website executes entirely on your local device.
+              </p>
+               <table width="284" height="58" border="0" align="center">
+   <tr>
+     <td align="center"><a href="/Downloads/Win/CryoWalletSetup.zip" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('windows1','','win.png',1)"><img src="win-bw.png" title="Download CryoWallet for Windows" name="windows1" width="35" height="52" border="0" id="windows1"></a></td>
+     <td align="center"><a href="/Downloads/Mac/CryoWallet.zip" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('mac1','','mac.png',1)"><img src="mac-bw.png" title="Download CryoWallet for Mac" name="mac1" width="35" height="52" border="0" id="mac1"></a></td>
+     <td align="center"><a href="/Downloads/Lin/CryoWallet.zip" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('linux1','','lin.png',1)"><img src="lin-bw.png" title="Download CryoWallet for Linux" name="linux1" width="35" height="52" border="0" id="linux1"></a></td>
+     <td align="center"><a href="http://phytjpthj3q7xbxb.onion" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('tor1','','tor.png',1)" target="_blank"><img src="tor-bw.png" title="Access CryoWallet via TOR" name="tor1" width="35" height="52" border="0" id="tor1"></a></td>
+     <td align="center"><a href="https://chrome.google.com/webstore/detail/cryowalletcom/fdjcpegfgobhcjeodebempmpeaicekig" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('app1','','app.png',1)" target="_blank"><img src="app-bw.png" title="Access CryoWallet via Chrome App" name="app1" width="35" height="52" border="0" id="app1"></a></td>
+     <td align="center"><a href="https://github.com/cryowallet/CryoWallet-Master" onMouseOut="MM_swapImgRestore()" onMouseOver="MM_swapImage('ext1','','git.png',1)" target="_blank"><img src="git-bw.png" title="Access CryoWallet Source Files on Github" name="ext1" width="35" height="52" border="0" id="ext1"></a></td>
+   </tr>
+ </table>
+              
+            </div>
+            
+            <div class="span4">
+              <h4><i class="icon-random"></i> Your passphrase is your wallet</h4>
+              <p>
+                Your passphrase is turned into a 128bit key which is then stretched into 10 bitcoin addresses. According to "<a href="http://www.grc.com/haystack.htm" target="_blank">how big is your haystack?</a>" Our passphrases would take 
+              <em>trillions of 
+               centuries</em> to break under a massive cracking scenario.
+                </p>
+                
+              <p>Our passphrases are also compatible with <a href="http://brainwallet.org/#chains" target="_blank">Brainwallet.org</a> and <a href="https://electrum.org/" target="_blank"> Electrum Wallets</a>, so even if this site goes down you'll still have access to your funds.</p>
+            </div>
+            <div class="span4">
+              <h4><i class="icon-user"></i> Live Network Transactions</h4>
+              <p>
+             <!-- <iframe src="https://www.cryowallet.com/globe3.html" width="200px" height="100px" scrolling="no" seamless></iframe>
+             -->
+             <div align="center"> <iframe src="/exceptions/transmon.html" width="300px" height="192px" align="center" scrolling="no" seamless></iframe>
+             
+             </div>
+             
+             
+               </p>
+              <p>
+              </p>
+              <p><strong></strong></p>
+              <p></p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    <!-- My Addresses -->
+    <div class="container">
+      <div id="site" class="tab-pane fade in ">
+        <div class="row">
+          <div class="span3">
+            <ul class="nav nav-list">
+              <li class="nav-header">Wallet Options</li>
+              <li class="active"><a href="#" id="your-addresses-nav"><i class="icon-align-justify"></i>Your Addresses</a></li>
+              <li><a href="#" id="make-payment-nav"><i class="icon-share"></i>Send a Payment</a></li>
+               <div class="nav-header">Current Exchange Rate</div>
+                 <li> 
+                 <div id="btc-quote"></div>
+		<script type="text/javascript" src="build/btcquote-widget.js"></script>
+		</li>
+		
+		<div class="nav-header">Make a Donation!</div>
+<li><p>If you like this service please think about supporting us through a donation to our Bitcoin address:</p></li>
+
+<table width="215"  border="0">
+  <tr>
+    <td width="80" height="97"><img src="qr.png" width="67" height="67"></td>
+    <td width="125"><p>1AtcEfWFb2SM w4nH4AafDgSYR jiMJAL43i</p>
+    </td>
+  </tr>
+</table>
+
+<table width="215"  border="0">
+<tr>
+    <td></td>
+    <p>&nbsp;</p>
+    </td>
+  </tr>
+  <tr>
+    <td width="40" rowspan="2"><img src="lock2.png" width="32" height="47"></td>
+    <td><strong>Connection Secured</strong></td>
+  </tr>
+  </table>
+       
+            </ul>
+           
+          </div>
+          <div id="your-addresses" class="span9">
+            <h4>You have 10 addresses. These are identifiers for sending or receiving Bitcoins. </h4>
+            <p>You do not have to be logged into your CryoWallet for it to receive coins. Bitcoins' network will record any inbound transactions to your wallet in the Blockchain. As soon as you login to your CryoWallet again, any funds will show up and be available to you immediately.
+           
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Your Public Wallet Addresses</th>
+                  <th>Bitcoin Balance</th>
+                  <th>Show QRCode</th>
+                </tr>
+              </thead>
+              <tr>
+                <td><code id="address0"></code></td>
+                <td><span><strong id="balance0">&nbsp;</strong></span></td>
+                <td><i id="qrcode0" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address1"></code></td>
+                <td><span><strong id="balance1">&nbsp;</strong></span></td>
+                <td><i id="qrcode1" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address2"></code></td>
+                <td><span><strong id="balance2">&nbsp;</strong></span></td>
+                <td><i id="qrcode2" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address3"></code></td>
+                <td><span><strong id="balance3">&nbsp;</strong></span></td>
+                <td><i id="qrcode3" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address4"></code></td>
+                <td><span><strong id="balance4">&nbsp;</strong></span></td>
+                <td><i id="qrcode4" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address5"></code></td>
+                <td><span><strong id="balance5">&nbsp;</strong></span></td>
+                <td><i id="qrcode5" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address6"></code></td>
+                <td><span><strong id="balance6">&nbsp;</strong></span></td>
+                <td><i id="qrcode6" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address7"></code></td>
+                <td><span><strong id="balance7">&nbsp;</strong></span></td>
+                <td><i id="qrcode7" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address8"></code></td>
+                <td><span><strong id="balance8">&nbsp;</strong></span></td>
+                <td><i id="qrcode8" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address9"></code></td>
+                <td><span><strong id="balance9">&nbsp;</strong></span></td>
+                <td><i id="qrcode9" class="icon-qrcode"></i></td>
+              </tr>
+            </table>
+          </div>
+          <div class="span9" id="tx">
+            <h4>Make a Payment</h4>
+            <form action="/" class="form-vertical" method="get">
+              <fieldset>
+                <div class="control-group form-hide">
+                  <label class="control-label" for="txSec">Private Key</label> 
+                  <div class="controls"> 
+                    <input class="span5" id="txSec" type="text"> 
+                    <span class="help-inline errormsg"></span> 
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="txDropAddr">Source Address</label> 
+                  <div class="controls">
+                    <select class="span4" id="txDropAddr"> 
+                    </select>
+                    <div class="input-prepend"> <span class="add-on">BTC</span><input class="span2" id="txBalance" readonly type="text"> 
+                    </div>
+                    <!--<button class="btn" id="txDropGetUnspent" title="Reload" type="button"><i class="icon-repeat"></i></button> 
+                      <button class="btn" data-target="#txUnspentForm" data-toggle="collapse" id="txToggle" type="button">Edit Inputs</button>-->
+                  </div>
+                </div>
+                <div class="control-group txCC">
+                  <label class="control-label" for="txDest">Destination Address</label> 
+                  <div class="controls">
+                    <input id="txDest" class="span4 txDest" type="text" placeholder="E.g. 1BountYypWttTvAJcMJVvSRDfX3TJ182To" autocomplete="off"> 
+                    <div class="input-prepend"> 
+                      <span class="add-on">BTC</span>
+                      <input class="span2" id="txValue" placeholder="E.g. 0.01" type="text" autocomplete="off"> 
+                    </div>
+                    <span class="help-inline errormsg">
+                    <button class="btn input-up" style="margin-bottom: 10px" id="txAddDest" type="button">+</button> 
+                    <button class="btn input-up" style="margin-bottom: 10px" id="txRemoveDest" type="button" disabled>&ndash;</button> 
+                    </span> 
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="txFee">Network Fee (Includes Miners Fee)</label> 
+                  <div class="controls">
+                    <div class="input-prepend"><span class="add-on">BTC</span><input readonly class="span2" id="txFee" type="text" value="0.0005"></div>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="txFee">You can check the payment before it is sent to the network.</label> 
+                  <div class="controls"> 
+                    <button class="btn" disabled style="margin-bottom: 10px" id="txSend" type="button">Verify and Send</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+
+            <div id="verifyModal" class="modal hide">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h6>Send payment of <span id="verifyAmountTitle">0.005</span> BTC from <span id="verifySource">1BountYypWttTvAJcMJVvSRDfX3TJ182</span></h6>
+              </div>
+              <div id="verifyBody" class="modal-body">
+                <table class="table table-bordered">
+                  <thead id="verifyTable">
+                    <tr>
+                      <th>Destination Address</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td><small><span class="label">A tiny miners fee of 0.0005 BTC will be added.</span></small></td>
+                    <td><small><span><strong>0.0005</strong></span></small></td>
+                  </tr>
+                  <tfoot>
+                    <tr>
+                      <td><strong>Total</strong></td>
+                      <td><strong id="verifyTotal">50.05</strong> BTC</td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <p id="tx-toggle" >
+                  <a data-toggle="collapse" 
+                  data-target="#advanced-details">Show/Hide Transaction Details (Advanced users)</a>
+                </p>
+                <div id="advanced-details" class="collapse">
+                  <div class="control-group">
+                    <label class="control-label" for="txJSON">JSON Transaction</label> 
+                    <div class="controls"> 
+                      <textarea class="span5" id="txJSON" rows="4" readonly></textarea>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="txHex">Raw Transaction</label> 
+                    <div class="controls"> 
+                      <textarea class="span5" id="txHex" rows="4" readonly></textarea>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+                <button id="sendPayment" data-dismiss="modal" class="btn btn-primary">Send Payment</button>
+              </div>
+            </div>
+
+            <div id="alertModal" class="modal hide">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h3>Response</h3>
+                </div>
+                <div class="modal-body">
+                  <p id="alertModalText"></p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" data-dismiss="modal" class="btn">Close</a>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+    <hr>
+      <p>&copy; CryoWallet 2014 - Whatever you do, don't lose your passphrase.</p>
+      <p>Need a little extra paranoia-level privacy? Try our <a href="http://torproject.org" target="_blank">TOR</a> service on: <a href="http://phytjpthj3q7xbxb.onion" target="_blank">http://phytjpthj3q7xbxb.onion</a></p>
+      
+     <table  border="0" align="center">
+  <tr>
+    <td><img src="twitter.png"></td>
+    <td><a href="http://www.twitter.com/cryowallet" target="_blank">Follow us on Twitter</a> or <a href="mailto:support@cryowallet.com">contact us by email</a></td>
+  </tr>
+   <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+     <td>&nbsp;</td>
+  </tr>
+ 
+</table>
+
+
+ 
+    </footer>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48285786-1', 'cryowallet.com');
+  ga('send', 'pageview');
+  
+
+
+</script>
+
+  </body>
+</html>

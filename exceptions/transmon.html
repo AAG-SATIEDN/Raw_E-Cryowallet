@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bitcoin Transactions</title>
+  <!-- <link rel="stylesheet" href="css/normalize.css"> -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+
+  <script type="text/x-handlebars" data-template-name="index">
+   
+    <section id="transactions">
+      <table width="300px">
+          <thead>
+           <th><div align="left">RELAY NODE</div></th>
+          <th>BTC </th>
+          <th>USD </th>
+        </thead>
+        <tbody>
+          {{#each item in arrangedContent}}
+          <tr>
+            
+         
+            <td width="100px"><div style="color: orange;">{{item.relayed_by}}</div></td>
+          
+            <td class="btc" width="100px">{{satoshis_to_btc item.total}}</td>
+            <td class="usd" width="100px"><div style="color: green;">${{format_as_currency item.totalUSD}}</div></td>
+          </tr>
+          {{/each}}
+        <tbody>
+      </table>
+    </section>
+  </script>
+
+  <script src="jquery-1.9.1.js"></script>
+  <script src="handlebars-1.0.0.js"></script>
+  <script src="ember-1.1.2.js"></script>
+  <script src="app1.js"></script>
+</body>
+</html>

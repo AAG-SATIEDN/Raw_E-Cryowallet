@@ -1,0 +1,413 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>CryoWallet.com - Really cool cold storage</title>
+
+    <meta name="description" content="100% secure Bitcoin wallet supporting cold storage. It's a wallet Jim, but not as you know it.">
+    <meta name="Keywords" content="bitcoin, wallet, cold storage, cold, storage, offline, btc, secure, bank, vault, crypto, cryowallet"/>
+    <meta content="CryoWallet" name="author">
+    
+    
+    <!-- Style sheets -->
+    <link href="css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="css/font-awesome.css" rel="stylesheet">
+    <link href="css/desktop.css" rel="stylesheet">
+    <link href="css/packaged-app.css" rel="stylesheet">
+    
+    
+    <!-- The following libraries are required for bitcon addresses and signing. -->
+    <script src="extjs/bitcoin/crypto.js"></script> 
+    <script src="extjs/bitcoin/sha256.js"></script> 
+    <script src="extjs/bitcoin/ripemd160.js"></script> 
+    <script src="extjs/bitcoin/jsbn.js"></script> 
+    <script src="extjs/bitcoin/jsbn2.js"></script> 
+    <script src="extjs/bitcoin/bitcoin.js"></script> 
+    <script src="extjs/bitcoin/util.js"></script> 
+    <script src="extjs/bitcoin/ec.js"></script> 
+    <script src="extjs/bitcoin/sec.js"></script> 
+    <script src="extjs/bitcoin/prng4.js"></script> 
+    <script src="extjs/bitcoin/rng.js"></script> 
+    <script src="extjs/bitcoin/ecdsa.js"></script> 
+    <script src="extjs/bitcoin/eckey.js"></script> 
+    <script src="extjs/bitcoin/base58.js"></script> 
+    <script src="extjs/bitcoin/address.js"></script> 
+    <script src="extjs/bitcoin/opcode.js"></script> 
+    <script src="extjs/bitcoin/script.js"></script> 
+    <script src="extjs/bitcoin/transaction.js"></script> 
+    
+    <!-- JQuery and bootstrap. -->
+    <script src="extjs/jquery-1.9.1.js"></script> 
+    <script src="extjs/bootstrap-collapse.js"></script> 
+    <script src="extjs/bootstrap-transition.js"></script> 
+    <script src="extjs/bootstrap-modal.js"></script> 
+    <script src="extjs/bootstrap-tooltip.js"></script> 
+    <script src="extjs/bootstrap-popover.js"></script> 
+   
+    
+    <!-- Other external libraries. -->
+    <script src="extjs/qrcode.js"></script> 
+    <script src="extjs/mnemonic.js"></script> 
+    <script src="extjs/electrum.js"></script> 
+    
+    <!-- JavaScript created specifically for CryoWallet. -->
+    <script src="js/tx.js"></script> 
+    <script src="js/blockchain.js"></script> 
+    <script src="js/wallet.js"></script> 
+    <script src="js/cryowallet.js"></script> 
+    
+  
+     <link href="favicon.png" rel="icon" type="image/png">
+     
+     
+     
+    
+     
+     
+  </head>
+ <body topmargin=0 marginwidth=0 marginheight=0>
+
+    <div class="navbar navbar-fixed-top">
+    <div id="headerstreak">
+   <table width="100%"  border="0" style="border-collapse: collapse;">
+  <tr>
+    <td height="10" bgcolor="#4d535f">&nbsp;</td>
+    <td height="10" bgcolor="#0088cc">&nbsp;</td>
+    <td height="10" bgcolor="#ee663e">&nbsp;</td>
+    <td height="10" bgcolor="#f3c146">&nbsp;</td>
+    <td height="10" bgcolor="#4d535f">&nbsp;</td>
+  </tr>
+</table>
+</div>
+      <div class="navbar-inner">
+        <div class="container">
+
+          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse"> 
+          <span class="icon-bar"></span> <span class="icon-bar"></span> 
+          <span class="icon-bar"></span> 
+          </a> 
+          <a class="brand" ><img src="logosmall.png"></a> 
+          
+       
+          
+        </div>
+      </div>
+    </div>
+    <!-- Home Page -->
+    
+      
+      <div id="logon">
+        <div id="headerDesktop">
+          
+          <div class="well" id="form-well">
+            <form>
+              <input id="password" placeholder="Enter your CryoWallet 12 word passphrase." value="" class="input-medium" type="password" />
+              <input id="open-sesame" disabled data-toggle="collapse" data-target="#create-keys" class="btn disabled" value="Unlock Wallet" />
+             
+            </form>
+            <div id="create-keys" class="collapse">
+              <div class="progress">
+                <div class="bar" id="seed-progress" style="width: 0%;"></div>
+              </div>
+             
+            </div>
+            <div id="create-wallet" class="collapse">
+            
+<table width="93%"  border="0">
+  <tr>
+    <td><img src="thumbup.png"></td>
+    <td> <h4 align="right">All done! You created a wallet. Doesn't get any simpler eh?</h4></td>
+  </tr>
+</table>
+            
+         
+              <p>We don't require any identifying information from you, not even an email address. We've generated your passphrase. It's all you need to access your new bitcoin wallet.
+              </p>
+              
+               <p align="center">Here's your 12-word passphrase. Whatever you do, DO NOT LOSE IT!</p>
+              
+              <p>
+                <input id="generated" value="" class="input-medium" type="text" />
+                <button class="btn" id="regenerate-password" data-toggle="tooltip" title="Click to generate another random passphrase." type="button"><i class="icon-repeat"></i></button>
+              </p>
+              <div></div>
+              <p align="center"><h4> <p align="center">IMPORTANT REMINDER:</p></h4></p>
+              <p align="center"><span class="label label-important">** COPY THIS NOW! IF YOU LOSE YOUR PASSPHRASE YOUR WALLET IS UNRECOVERABLE. FOREVER. **</span></p>
+              <div>.</div>
+              
+            </div>
+          </div>
+      
+        </div>
+        
+        
+        <div class="container">
+        <div align="right">.</div>
+       <div align="center">If you don't already have a wallet, you can create one at <strong>https://www.cryowallet.com</strong></div>
+          <h3 class="sales-title"></h3>
+          <h4 class="sales-subtitle"></h4>
+          <div class="row">
+            <div class="span4">
+                     </div>
+            <div class="span4">
+                         </div>
+            <div class="span4">
+             
+            </div>
+          </div>
+         
+          <h4 class="sales-subtitle"></h4>
+          <div class="row">
+            <div class="span4">
+             
+            </div>
+            
+            <div class="span4">
+              
+            </div>
+            <div class="span4">
+     
+             </div>
+             
+             
+               </p>
+              <p>
+              </p>
+              <p><strong></strong></p>
+              <p></p>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+    <!-- My Addresses -->
+    <div class="container">
+      <div id="site" class="tab-pane fade in ">
+        <div class="row">
+          <div class="span3">
+            <ul class="nav nav-list">
+              <li class="nav-header">Wallet Options</li>
+              <li class="active"><a href="#" id="your-addresses-nav"><i class="icon-align-justify"></i>Your Addresses</a></li>
+              <li><a href="#" id="make-payment-nav"><i class="icon-share"></i>Send a Payment</a></li>
+               <div class="nav-header">Current Exchange Rate</div>
+                 <li> 
+                 <div id="btc-quote"></div>
+		<script type="text/javascript" src="build/btcquote-widget.js"></script>
+		</li>
+		
+		<div class="nav-header">Make a Donation!</div>
+<li><p>If you like this service please think about supporting us through a donation to our Bitcoin address:</p></li>
+
+<table width="215"  border="0">
+  <tr>
+    <td width="80" height="97"><img src="qr.png" width="67" height="67"></td>
+    <td width="125"><p>1AtcEfWFb2SM w4nH4AafDgSYR jiMJAL43i</p>
+    </td>
+  </tr>
+</table>
+
+
+       
+            </ul>
+           
+          </div>
+          <div id="your-addresses" class="span9">
+          
+           
+            <table class="table table-bordered table-striped">
+              <thead>
+                <tr>
+                  <th>Your Public Wallet Addresses</th>
+                  <th>Bitcoin Balance</th>
+                  <th>Show QRCode</th>
+                </tr>
+              </thead>
+              <tr>
+                <td><code id="address0"></code></td>
+                <td><span><strong id="balance0">&nbsp;</strong></span></td>
+                <td><i id="qrcode0" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address1"></code></td>
+                <td><span><strong id="balance1">&nbsp;</strong></span></td>
+                <td><i id="qrcode1" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address2"></code></td>
+                <td><span><strong id="balance2">&nbsp;</strong></span></td>
+                <td><i id="qrcode2" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address3"></code></td>
+                <td><span><strong id="balance3">&nbsp;</strong></span></td>
+                <td><i id="qrcode3" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address4"></code></td>
+                <td><span><strong id="balance4">&nbsp;</strong></span></td>
+                <td><i id="qrcode4" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address5"></code></td>
+                <td><span><strong id="balance5">&nbsp;</strong></span></td>
+                <td><i id="qrcode5" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address6"></code></td>
+                <td><span><strong id="balance6">&nbsp;</strong></span></td>
+                <td><i id="qrcode6" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address7"></code></td>
+                <td><span><strong id="balance7">&nbsp;</strong></span></td>
+                <td><i id="qrcode7" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address8"></code></td>
+                <td><span><strong id="balance8">&nbsp;</strong></span></td>
+                <td><i id="qrcode8" class="icon-qrcode"></i></td>
+              </tr>
+              <tr>
+                <td><code id="address9"></code></td>
+                <td><span><strong id="balance9">&nbsp;</strong></span></td>
+                <td><i id="qrcode9" class="icon-qrcode"></i></td>
+              </tr>
+            </table>
+          </div>
+          <div class="span9" id="tx">
+            <h4>Make a Payment</h4>
+            <form action="/" class="form-vertical" method="get">
+              <fieldset>
+                <div class="control-group form-hide">
+                  <label class="control-label" for="txSec">Private Key</label> 
+                  <div class="controls"> 
+                    <input class="span5" id="txSec" type="text"> 
+                    <span class="help-inline errormsg"></span> 
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="txDropAddr">Source Address</label> 
+                  <div class="controls">
+                    <select class="span4" id="txDropAddr"> 
+                    </select>
+                    <div class="input-prepend"> <span class="add-on">BTC</span><input class="span2" id="txBalance" readonly type="text"> 
+                    </div>
+                    <!--<button class="btn" id="txDropGetUnspent" title="Reload" type="button"><i class="icon-repeat"></i></button> 
+                      <button class="btn" data-target="#txUnspentForm" data-toggle="collapse" id="txToggle" type="button">Edit Inputs</button>-->
+                  </div>
+                </div>
+                <div class="control-group txCC">
+                  <label class="control-label" for="txDest">Destination Address</label> 
+                  <div class="controls">
+                    <input id="txDest" class="span4 txDest" type="text" placeholder="E.g. 1BountYypWttTvAJcMJVvSRDfX3TJ182To" autocomplete="off"> 
+                    <div class="input-prepend"> 
+                      <span class="add-on">BTC</span>
+                      <input class="span2" id="txValue" placeholder="E.g. 0.01" type="text" autocomplete="off"> 
+                    </div>
+                    <span class="help-inline errormsg">
+                    <button class="btn input-up" style="margin-bottom: 10px" id="txAddDest" type="button">+</button> 
+                    <button class="btn input-up" style="margin-bottom: 10px" id="txRemoveDest" type="button" disabled>&ndash;</button> 
+                    </span> 
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="txFee">Network Fee (Includes Miners Fee)</label> 
+                  <div class="controls">
+                    <div class="input-prepend"><span class="add-on">BTC</span><input readonly class="span2" id="txFee" type="text" value="0.0005"></div>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="txFee">You can check the payment before it is sent to the network.</label> 
+                  <div class="controls"> 
+                    <button class="btn" disabled style="margin-bottom: 10px" id="txSend" type="button">Verify and Send</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+
+            <div id="verifyModal" class="modal hide">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h6>Send payment of <span id="verifyAmountTitle">0.005</span> BTC from <span id="verifySource">1BountYypWttTvAJcMJVvSRDfX3TJ182</span></h6>
+              </div>
+              <div id="verifyBody" class="modal-body">
+                <table class="table table-bordered">
+                  <thead id="verifyTable">
+                    <tr>
+                      <th>Destination Address</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tr>
+                    <td><small><span class="label">A tiny miners fee of 0.0005 BTC will be added.</span></small></td>
+                    <td><small><span><strong>0.0005</strong></span></small></td>
+                  </tr>
+                  <tfoot>
+                    <tr>
+                      <td><strong>Total</strong></td>
+                      <td><strong id="verifyTotal">50.05</strong> BTC</td>
+                    </tr>
+                  </tfoot>
+                </table>
+                <p id="tx-toggle" >
+                  <a data-toggle="collapse" 
+                  data-target="#advanced-details">Show/Hide Transaction Details (Advanced users)</a>
+                </p>
+                <div id="advanced-details" class="collapse">
+                  <div class="control-group">
+                    <label class="control-label" for="txJSON">JSON Transaction</label> 
+                    <div class="controls"> 
+                      <textarea class="span5" id="txJSON" rows="4" readonly></textarea>
+                    </div>
+                  </div>
+                  <div class="control-group">
+                    <label class="control-label" for="txHex">Raw Transaction</label> 
+                    <div class="controls"> 
+                      <textarea class="span5" id="txHex" rows="4" readonly></textarea>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a href="#" data-dismiss="modal" class="btn">Cancel</a>
+                <button id="sendPayment" data-dismiss="modal" class="btn btn-primary">Send Payment</button>
+              </div>
+            </div>
+
+            <div id="alertModal" class="modal hide">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h3>Response</h3>
+                </div>
+                <div class="modal-body">
+                  <p id="alertModalText"></p>
+                </div>
+                <div class="modal-footer">
+                  <a href="#" data-dismiss="modal" class="btn">Close</a>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+
+
+ 
+    </footer>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-48285786-1', 'cryowallet.com');
+  ga('send', 'pageview');
+  
+      <!-- If I have seen further it is by standing on the shoulders of giants. -->
+
+</script>
+
+  </body>
+</html>

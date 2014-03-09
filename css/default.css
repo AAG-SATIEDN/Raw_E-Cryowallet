@@ -1,0 +1,142 @@
+body {
+  position: relative;
+  background-image:url('fillerbg.png');
+background-repeat:repeat-x;
+}
+
+#hr {
+color: black;	
+}
+
+#headerstreak {
+      height: 10px;
+      
+}
+
+#address0 {
+color: #004e74	
+}
+#address1 {
+color: #004e74	
+}
+#address2 {
+color: #004e74	
+}
+#address3 {
+color: #004e74	
+}
+#address4 {
+color: #004e74	
+}
+#address5 {
+color: #004e74	
+}
+#address6 {
+color: #004e74	
+}
+#address7 {
+color: #004e74	
+}
+#address8 {
+color: #004e74	
+}
+#address9 {
+color: #004e74	
+}
+
+
+input[disabled],select[disabled],textarea[disabled],input[readonly],select[readonly],textarea[readonly]{background-color:#eeeeee;border-color:#ddd; cursor: auto;}
+
+#qr {
+    width: 185px;
+    height: 185px;
+    display: inline-block;
+}
+
+#qr_addr {
+    position: relative;
+    z-index: 1;
+}
+
+legend {
+    margin-bottom: 0px;
+}
+
+.form-hide {
+    display: none;
+}
+
+#site {
+  padding-top: 90px;
+}
+
+/* Front page password form */
+
+#header {
+  background: #0F141C url('../images/header-bg.jpg') no-repeat;
+  padding-top: 95px;
+}
+
+#headerDesktop {
+  
+  padding-top: 95px;
+}
+
+.sales-title {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.sales-subtitle {
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: -10px;
+  color: #666;
+}
+
+#header h1 {
+  font-size: 2em;
+  text-align: center;
+  color: white;
+  text-shadow: -1px -1px 2px #000;
+}
+
+#header h2 {
+  font-size: 1.5em;
+  text-align: center;
+  color: white;
+  padding-bottom: 20px;
+  text-shadow: -1px -1px 2px #000;
+}
+
+#form-well {
+    width: 600px;
+    margin: 0 auto;
+    padding-bottom: 0px;
+}
+
+#form-well input {
+    margin-bottom: 0;
+}
+
+#form-well input[type='text'] {
+    width: 520px;
+}
+
+#form-well input[type='password'] {
+    width: 320px;
+}
+
+#form-well .btn-success {
+  width: 115px;
+}
+
+#open-sesame {
+  width: 90px;
+}
+
+/* Footer */
+footer p {
+    text-align: center;
+}
+

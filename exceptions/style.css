@@ -1,0 +1,57 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  box-sizing: border-box;
+  font: 11px Menlo, monospace;
+}
+
+body {
+  padding: 5px;
+  background: #222426;
+  color: #555;
+}
+
+h1 {
+  color: #888;
+  float: left;
+}
+
+header .price {
+  float: right;
+}
+
+section#transactions {
+  clear: both;
+  padding-top: 5px;
+}
+
+table {
+  width: 100%;
+}
+
+th {
+  text-align: right;
+  padding-bottom: 5px;
+}
+
+td {
+  padding-right: 5px;
+  line-height: 20px;
+}
+
+td.btc, td.usd, td.size {
+  text-align: right;
+}
+
+td.usd, td.btc {
+  color: #888;
+}
+
+td.usd {
+  padding-right: 0;
+}
+
+canvas#visualizer {
+  margin-top: 25px;
+}
